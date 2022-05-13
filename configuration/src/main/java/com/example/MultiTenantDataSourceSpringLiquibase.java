@@ -82,7 +82,23 @@ public class MultiTenantDataSourceSpringLiquibase implements InitializingBean, R
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info("DataSources based multiTenancy enabled");
+        runGlobalOnAllDataSources();
         runOnAllDataSources();
+    }
+
+    private void runGlobalOnAllDataSources() {
+        dataSources.forEach((tenant, datasources) -> {
+            log.info("Initializing Liquibase for all data source " + tenant);
+
+            final SpringLiquibase liquibase = getSpringLiquibase(datasources);
+            try {
+                log.warn(STARTING_SYNC_MESSAGE);
+                initDb(liquibase);
+            } catch (LiquibaseException e) {
+                log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
+            }
+            log.info("Liquibase ran for data source " + tenant);
+        });
     }
 
     private void runOnAllDataSources() {
@@ -90,22 +106,11 @@ public class MultiTenantDataSourceSpringLiquibase implements InitializingBean, R
             log.info("Initializing Liquibase for data source " + tenant);
             final LiquibaseProperties lProperty = propertiesDataSources.get(tenant);
             SpringLiquibase liquibase = lProperty != null ? getSpringLiquibase(dataSource, lProperty) : getSpringLiquibase(dataSource);
-            if (taskExecutor != null) {
-//                taskExecutor.execute(() -> {
-                    try {
-                        log.warn(STARTING_ASYNC_MESSAGE);
-                        initDb(liquibase);
-                    } catch (LiquibaseException e) {
-                        log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
-                    }
- //               });
-            } else {
-                try {
-                    log.warn(STARTING_ASYNC_MESSAGE);
-                    initDb(liquibase);
-                } catch (LiquibaseException e) {
-                    log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
-                }
+            try {
+                log.warn(STARTING_SYNC_MESSAGE);
+                initDb(liquibase);
+            } catch (LiquibaseException e) {
+                log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
             }
 
             log.info("Liquibase ran for data source " + tenant);

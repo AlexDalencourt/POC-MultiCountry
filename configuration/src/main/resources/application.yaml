@@ -22,7 +22,6 @@ spring:
         change-log: classpath:db/en/db.changelog-master.yaml
   liquibase:
       enabled: true
-      default-schema: public
       change-log: classpath:db/all/db.changelog-master.yaml
   jpa:
     hibernate:
