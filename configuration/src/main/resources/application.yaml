@@ -1,0 +1,39 @@
+spring:
+  dataSources:
+    - tenantId: fr
+      url: jdbc:postgresql://localhost:5432/dbtest?currentSchema:fr;
+      username: postgres
+      driverClassName: org.postgresql.Driver
+      password: password
+      liquibase:
+        enabled: true
+        default-schema: fr
+        change-log: classpath:db/fr/db.changelog-master.yaml
+    - tenantId: en
+      url: jdbc:postgresql://localhost:5432/dbtest?currentSchema:en;
+      username: postgres
+      driverClassName: org.postgresql.Driver
+      password: password
+      liquibase:
+        enabled: true
+        default-schema: en
+        change-log: classpath:db/en/db.changelog-master.yaml
+  liquibase:
+      enabled: true
+      default-schema: public
+      change-log: classpath:db/all/db.changelog-master.yaml
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.H2Dialect
+
+logging:
+    level:
+      web: TRACE
+      org:
+        springframework:
+          web: TRACE

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ADA
+      changes:
+        - createTable:
+            tableName: CONTRACT
+            columns:
+              - column:
+                  name: ID
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: text
