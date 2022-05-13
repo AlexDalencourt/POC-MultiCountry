@@ -106,11 +106,23 @@ public class MultiTenantDataSourceSpringLiquibase implements InitializingBean, R
             log.info("Initializing Liquibase for data source " + tenant);
             final LiquibaseProperties lProperty = propertiesDataSources.get(tenant);
             SpringLiquibase liquibase = lProperty != null ? getSpringLiquibase(dataSource, lProperty) : getSpringLiquibase(dataSource);
-            try {
-                log.warn(STARTING_SYNC_MESSAGE);
-                initDb(liquibase);
-            } catch (LiquibaseException e) {
-                log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
+            if (taskExecutor != null) {
+                // TODO see why asynchronous does not work
+       //         taskExecutor.execute(() -> {
+                    try {
+                        log.warn(STARTING_ASYNC_MESSAGE);
+                        initDb(liquibase);
+                    } catch (LiquibaseException e) {
+                        log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
+                    }
+       //         });
+            } else {
+                try {
+                    log.warn(STARTING_ASYNC_MESSAGE);
+                    initDb(liquibase);
+                } catch (LiquibaseException e) {
+                    log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
+                }
             }
 
             log.info("Liquibase ran for data source " + tenant);
