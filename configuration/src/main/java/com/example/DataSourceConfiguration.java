@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.multiTenant.TenantRoutingDataSource;
 import com.example.properties.DataSourceProperties;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,7 @@ public class DataSourceConfiguration {
                     .password(dataSourceProperty.password())
                     .driverClassName(dataSourceProperty.driverClassName())
                     .build();
+            ((HikariDataSource) dataSource).setSchema(dataSourceProperty.schema());
             return new TenantIdDataSource(dataSourceProperty.tenantId(), dataSource);
         }).collect(Collectors.toMap(TenantIdDataSource::tenantId, TenantIdDataSource::dataSource));
     }

@@ -1,7 +1,8 @@
 spring:
   dataSources:
     - tenantId: fr
-      url: jdbc:postgresql://localhost:5432/dbtest?currentSchema:fr;
+      url: jdbc:postgresql://localhost:5432/dbtest
+      schema: fr
       username: postgres
       driverClassName: org.postgresql.Driver
       password: password
@@ -10,7 +11,8 @@ spring:
         default-schema: fr
         change-log: classpath:db/fr/db.changelog-master.yaml
     - tenantId: en
-      url: jdbc:postgresql://localhost:5432/dbtest?currentSchema:en;
+      url: jdbc:postgresql://localhost:5432/dbtest
+      schema: en
       username: postgres
       driverClassName: org.postgresql.Driver
       password: password
@@ -29,7 +31,7 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 logging:
     level:

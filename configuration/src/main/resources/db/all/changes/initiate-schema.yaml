@@ -5,7 +5,7 @@ databaseChangeLog:
       changes:
         - createTable:
             tableName: CONTRACT
-            schema: DB_EN
+            schema: public
             columns:
               - column:
                   name: ID

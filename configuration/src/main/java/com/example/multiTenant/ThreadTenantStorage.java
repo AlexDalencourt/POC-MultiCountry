@@ -2,7 +2,7 @@ package com.example.multiTenant;
 
 public class ThreadTenantStorage {
 
-    private static ThreadLocal<String> currentTenant = new ThreadLocal<>();
+    private static final ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
     public static void setTenantId(String tenantId) {
         currentTenant.set(tenantId);
