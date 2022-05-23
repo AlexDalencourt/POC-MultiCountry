@@ -10,28 +10,27 @@ import java.util.UUID;
 @FR
 @Service
 @Slf4j
-public class ContractBusinessFR {
-
-    private final ContractRepository repository;
+public class ContractBusinessFR extends ContractBusiness {
 
     public ContractBusinessFR(ContractRepository repository) {
-        this.repository = repository;
+        super(repository);
     }
 
+    @Override
     public Contract save(Contract contract){
         log.info("Specific FR save method");
 
-        return this.repository.save(contract);
+        return super.save(contract);
     }
 
     public Contract getById(UUID id){
         log.info("Specific FR getById method");
 
-        return this.repository.findById(id);
+        return super.getById(id);
     }
 
     public List<Contract> getAll(){
         log.info("Specific FR getAll method");
-        return this.repository.findAll();
+        return super.getAll();
     }
 }
