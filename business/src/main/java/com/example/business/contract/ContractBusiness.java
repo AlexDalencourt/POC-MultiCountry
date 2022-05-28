@@ -1,12 +1,14 @@
 package com.example.business.contract;
 
-import org.springframework.context.annotation.Primary;
+import com.example.multi.country.lib.annotations.CountryResolver;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@CountryResolver
 public class ContractBusiness {
 
     private final ContractRepository repository;
@@ -26,4 +28,11 @@ public class ContractBusiness {
     public List<Contract> getAll(){
         return this.repository.findAll();
     }
+
+    private void method(){}
+    void method3(){}
+    protected Void method4(){return null;}
+
+    public static void method2(){}
+
 }

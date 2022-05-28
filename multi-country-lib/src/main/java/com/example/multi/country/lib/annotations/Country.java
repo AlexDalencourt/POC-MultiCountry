@@ -1,4 +1,4 @@
-package com.example.business.country.declaration;
+package com.example.multi.country.lib.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

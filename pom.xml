@@ -8,6 +8,7 @@
         <module>business</module>
         <module>entrypoint</module>
         <module>configuration</module>
+        <module>multi-country-lib</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

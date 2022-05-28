@@ -1,4 +1,4 @@
-package com.example.business.country.declaration;
+package com.example.multi.country.lib.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Country("fr")
-public @interface FR {
+@Country("en")
+public @interface EN{
 }
