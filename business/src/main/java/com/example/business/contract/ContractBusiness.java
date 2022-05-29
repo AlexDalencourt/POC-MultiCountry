@@ -1,7 +1,6 @@
 package com.example.business.contract;
 
-import com.example.multi.country.lib.annotations.CountryResolver;
-import lombok.Getter;
+import com.multi.country.lib.core.annotations.CountryResolver;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

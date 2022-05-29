@@ -1,6 +1,6 @@
 package com.example.business.contract;
 
-import com.example.multi.country.lib.annotations.EN;
+import com.multi.country.lib.core.annotations.EN;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

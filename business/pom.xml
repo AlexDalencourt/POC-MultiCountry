@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>business</artifactId>
-    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -18,8 +17,8 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>multi-country-lib</artifactId>
+            <groupId>com.multi.country.lib</groupId>
+            <artifactId>multi-country-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
