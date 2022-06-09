@@ -8,7 +8,7 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 @Component
 public class HeaderTenantInterceptor implements WebRequestInterceptor {
 
-    public static final String TENANT_HEADER = "X-TenantID";
+    public static final String TENANT_HEADER = "";
 
     @Override
     public void preHandle(WebRequest request) {

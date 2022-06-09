@@ -80,7 +80,7 @@ public class MultiTenantDataSourceSpringLiquibase implements InitializingBean, R
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         log.info("DataSources based multiTenancy enabled");
         runGlobalOnAllDataSources();
         runOnAllDataSources();

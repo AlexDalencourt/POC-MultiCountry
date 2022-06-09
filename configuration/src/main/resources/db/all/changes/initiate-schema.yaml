@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ADA
       changes:
         - createTable:
-            tableName: CONTRACT_ext
+            tableName: CONTRACT_EXT
             schema: public
             columns:
               - column:
@@ -15,4 +15,14 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: NAME
+                  type: text
+  - changeSet:
+      id: 4
+      author: ADA
+      changes:
+        - addColumn:
+            tableName: CONTRACT_EXT
+            columns:
+              - column:
+                  name: country
                   type: text

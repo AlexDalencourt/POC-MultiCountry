@@ -15,3 +15,17 @@ databaseChangeLog:
               - column:
                   name: NAME
                   type: text
+  - changeSet:
+      id: 2
+      author: ADA
+      changes :
+        - dropColumn:
+            columnName: name
+            tableName: CONTRACT_EXT
+        - addColumn:
+            tableName: CONTRACT_EXT
+            columns:
+              - column:
+                  name: siret
+                  type: text
+
