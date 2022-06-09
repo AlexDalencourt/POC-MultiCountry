@@ -4,7 +4,6 @@ import com.example.business.contract.Contract;
 import com.example.data.contract.entity.ContractEntity;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
