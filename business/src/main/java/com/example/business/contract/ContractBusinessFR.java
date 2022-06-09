@@ -19,7 +19,7 @@ public class ContractBusinessFR extends ContractBusiness {
     @Override
     public Contract save(Contract contract){
         log.info("Specific FR save method");
-
+        log.info("Siret : " + ((ContractExtFR)contract.ext()).getSiret());
         return super.save(contract);
     }
 
