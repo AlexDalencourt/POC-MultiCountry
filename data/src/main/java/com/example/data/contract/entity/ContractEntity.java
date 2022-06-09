@@ -1,13 +1,22 @@
 package com.example.data.contract.entity;
 
 import com.example.business.contract.Contract;
-import org.hibernate.annotations.Type;
+import com.example.business.contract.ContractExt;
+import com.multi.country.lib.core.annotations.CountryFieldBinder;
+import com.multi.country.lib.core.annotations.FR;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.UUID;
+import java.util.function.BiFunction;
+
+import static com.example.data.contract.entity.ContractEntityFieldsBinder.infoBinder;
 
 @Entity
 @Table(name = "Contract")
+@Getter
+@Setter
 public class ContractEntity {
 
     @Id
@@ -16,13 +25,22 @@ public class ContractEntity {
 
     private String name;
 
+    @OneToOne(mappedBy = "contract", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @CountryFieldBinder(constructorParameters = {Contract.class}, countryParameterizedClass = ContractExt.class)
+    private ContractInfoEntity info;
+
     public ContractEntity() {
 
     }
 
-    public ContractEntity(Contract entity) {
-        id = entity.id();
-        name = entity.name();
+    public ContractEntity(Contract business) {
+        id = business.id();
+        name = business.name();
+        if(business.ext() != null){
+            info = infoBinder.apply(business, business.ext());
+            info.setContract(this);
+        }
     }
 
     public UUID getId() {
@@ -42,6 +60,6 @@ public class ContractEntity {
     }
 
     public Contract toRecord(){
-        return new Contract(id, name);
+        return new Contract(id, name, info.toRecord());
     }
 }
